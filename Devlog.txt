@@ -1,0 +1,26 @@
+kishiW -- 2024-1024
+
+Got sorted into groups, started Devlog and Design document
+Had a big argument about our name, thankfully we went with SwedishFish instead of Scandanavian Tortoises.
+
+kishiW -- 2024-10-28
+
+Clarified points on our design document
+    - We specified that the Account page was the login page
+    - We specified that finished stories meant already edited stories, and changed accordingly
+
+Site map was updated
+    - Added the correct 2 way arrows
+    - We changed "Finished Stories" to Already Edited Stories
+
+We made databases more specific
+    - Went from 2 categories to 3
+    - Added more data columns
+    - Added author votes for newest edit underneath Individual story data
+
+Task assignments
+	- More specifics
+	- Better distribution
+
+thasan50 -- 2024-10-28
+Added Tanzeem branch
