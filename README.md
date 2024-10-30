@@ -22,16 +22,17 @@ Must have Git and Python installed beforehand.
 ```
 git clone https://github.com/thasan50/SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2.git
 ```
-4. cd into the repo, ```
-cd SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2.git.```
-5. Setup a virtual environment
+4. Setup a virtual environment
 ```
 python3 -m venv <name>
 ```
-6. Activate virtual environment
+5. Activate virtual environment
 ```
 . <name>/bin/activate
 ```
+6. cd into the repo, ```
+cd SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2.git.```
+
 7. Install required packages
 ```
 pip install -r requirements.txt
