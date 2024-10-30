@@ -18,22 +18,22 @@ Must have Git and Python installed beforehand.
 1. Locate green <>Code button on main page of project repository
 2. Copy the HTTPS URL
 3. Open the terminal on your local machine and navigate to the desired directory
-3. Clone the repository in the corresponding directory:
+4. Clone the repository in the corresponding directory:
 ```
 git clone https://github.com/thasan50/SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2.git
 ```
-4. Setup a virtual environment
+5. Setup a virtual environment
 ```
 python3 -m venv <name>
 ```
-5. Activate virtual environment
+6. Activate virtual environment
 ```
 . <name>/bin/activate
 ```
-6. cd into the repo, ```
+7. cd into the repo, ```
 cd SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2.git.```
 
-7. Install required packages
+8. Install required packages
 ```
 pip install -r requirements.txt
 ```
