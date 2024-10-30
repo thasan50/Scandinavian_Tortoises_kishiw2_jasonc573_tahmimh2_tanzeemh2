@@ -23,7 +23,7 @@ Task assignments
 	- Better distribution
 
 thasan50 -- 2024-10-29
-- Added Tanzeem branch
+- Added "Tanzeem" branch
 
 thassan50 -- 2024-10-29
 -added "tahmim" branch
@@ -40,6 +40,8 @@ jchao50 - 2024-10-29
 thasan50 -- 2024-10-30
 - Added project title, roster, project description,
 install guide, and launch codes to README.md
+- Noted positive feedback from Ivan and Mark regarding
+README.md details, python code, and design doc.
 
 thassan50 -- 2024-10-30
 -fixed order of install guides
