@@ -1,4 +1,4 @@
-kishiW -- 2024-1024
+kishiW -- 2024-10-24
 
 Got sorted into groups, started Devlog and Design document
 Had a big argument about our name, thankfully we went with SwedishFish instead of Scandanavian Tortoises.
@@ -22,10 +22,13 @@ Task assignments
 	- More specifics
 	- Better distribution
 
-thasan50 -- 2024-10-28
-Added Tanzeem branch
+thasan50 -- 2024-10-29
+- Added Tanzeem branch
 
-kishiW -- 2024-10-28
+kishiW -- 2024-10-29
+- Added flag
+- Added python run files.
 
-Added flag
-Added python run files.
+thasan50 -- 2024-10-30
+- Added project title, roster, project description, 
+install guide, and launch codes to README.md
