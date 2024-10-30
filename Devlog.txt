@@ -25,6 +25,9 @@ Task assignments
 thasan50 -- 2024-10-29
 - Added Tanzeem branch
 
+thassan50 -- 2024-10-29
+-added "tahmim" branch
+
 kishiW -- 2024-10-29
 - Added flag
 - Added python run files.
@@ -37,3 +40,6 @@ jchao50 - 2024-10-29
 thasan50 -- 2024-10-30
 - Added project title, roster, project description,
 install guide, and launch codes to README.md
+
+thassan50 -- 2024-10-30
+-fixed order of install guides
