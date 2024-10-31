@@ -1,43 +1,38 @@
+'''
+Swedish Fish - Kishi Wijaya, Jason Chao, Tahmim Hassan, Tanzeem Hasan
+SoftDev
+P00: Move Slowly and Fix Things
+2024-10-30
+Time Spent: 0.2
+'''
+
 from flask import Flask, render_template, request, session, redirect
-import os
-
 app = Flask(__name__)
-app.secret_key = os.urandom(32)
-
-logins = {"victor" : "casado",
-          "jason" : "chao",
-          "evan" : "chan"}
 
 @app.route('/')
+def home():
+    return "Home page goes here"
+
+@app.route('/login')
 def login():
-    if 'username' in session:
-        return redirect('/auth')
-    else:
-        return render_template("login.html")
+    return "Login & registration goes here"
 
-@app.route('/auth')
-def auth_login():
-    if 'username' in session:
-        return render_template("home.html", user = session['username'])
-    login = request.args
-    # print(login['username'])
-    # print(login['password'])
-    username = login['username']
-    password = login['password']
-    if username in logins:
-        if logins[username] == password:
-            session['username'] = username
-            return render_template("home.html", user = username)
-        else:
-            return redirect('/')
-    else:
-        return redirect('/') # redirect back to / route
+@app.route('/view')
+def view():
+    return "Viewing stories goes here"
 
-@app.route('/logout')
-def logout():
-    del session['username']
-    return redirect('/')
+@app.route('/create')
+def create():
+    return "Creating stories goes here"
 
-if __name__ == "__main__": #false if this file imported as module
+@app.route('/edit')
+def edit():
+    return "Editing stories goes here"
+
+@app.route('/history')
+def history():
+    return "View edit histories here"
+
+if __name__ == "__main__":
     app.debug = True
     app.run()
