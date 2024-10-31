@@ -1,9 +1,9 @@
-kishiW -- 2024-10-24
+kwijaya50 -- 2024-10-24
 
 Got sorted into groups, started Devlog and Design document
 Had a big argument about our name, thankfully we went with SwedishFish instead of Scandanavian Tortoises.
 
-kishiW -- 2024-10-28
+kwijaya50 -- 2024-10-28
 
 Clarified points on our design document
     - We specified that the Account page was the login page
@@ -23,9 +23,12 @@ Task assignments
 	- Better distribution
 
 thasan50 -- 2024-10-29
-- Added Tanzeem branch
+- Added "Tanzeem" branch
 
-kishiW -- 2024-10-29
+thassan50 -- 2024-10-29
+-added "tahmim" branch
+
+kWijaya50 -- 2024-10-29
 - Added flag
 - Added python run files.
 
@@ -37,3 +40,14 @@ jchao50 - 2024-10-29
 thasan50 -- 2024-10-30
 - Added project title, roster, project description,
 install guide, and launch codes to README.md
+- Noted positive feedback from Ivan and Mark regarding
+README.md details, python code, and design doc.
+
+thassan50 -- 2024-10-30
+-fixed order of install guides
+
+thasan50 --2024-10-31
+- Updated name for design doc to design.pdf
+kwijaya50 -- 2024-10-31
+- fixed file names
+- added folders for app, templates, css, ect.
