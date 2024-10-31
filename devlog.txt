@@ -45,3 +45,6 @@ README.md details, python code, and design doc.
 
 thassan50 -- 2024-10-30
 -fixed order of install guides
+
+thasan50 --2024-10-31
+- Updated name for design doc to design.pdf
