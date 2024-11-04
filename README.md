@@ -41,6 +41,6 @@ pip install -r requirements.txt
 1. Navigate to project directory
 ```cd stuff/SwedishFish__kishiw2_jasonc573_tahmimh2_tanzeemh2```
 2. Run app
-```python3 app.py```
+```python3 __init__.py```
 3. Open firefox and go to the given link
 ```http://127.0.0.1:5000```
