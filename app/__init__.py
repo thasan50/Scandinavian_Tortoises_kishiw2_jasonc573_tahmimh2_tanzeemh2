@@ -9,13 +9,17 @@ Time Spent: 0.2
 from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def home():
-    return "Home page goes here"
+    return render_template('templates/home.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
     return "Login & registration goes here"
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return "Registration goes here"
 
 @app.route('/view')
 def view():

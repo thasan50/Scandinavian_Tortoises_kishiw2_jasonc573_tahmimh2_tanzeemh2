@@ -10,10 +10,15 @@
         <h1>Tater Tots</h1>
         <br>
         <h3>
-            {* if ''}
-            <form action="/logout">
-                <input type="submit" name="sub1" value="Log Out">
+        {% if 'username' in session %}
+            <form action="/logout" method="POST">
+                <input type="submit" name="logout" value="Logout">
             </form>
+        {% else %}
+            <form action="/login" method="POST">
+                <input type="submit" name="login" value="Login">
+            </form>
+        {% endif %}
         </h3>
     </body>
 
