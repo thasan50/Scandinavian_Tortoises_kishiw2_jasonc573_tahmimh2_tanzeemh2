@@ -55,3 +55,10 @@ kwijaya50 -- 2024-10-31
 thassan50 -- 2024-11-04
 -added directory to house database creator
 -added file to create rudimentary databases
+
+kwijaya50 -- 2024-11-05
+- added new python files for newStory and view
+- added new css filse for newStory, view, and editing
+- started working on the css
+- updated newStory, view, and editing htmls
+- waiting to work on linking the templates and database in class
