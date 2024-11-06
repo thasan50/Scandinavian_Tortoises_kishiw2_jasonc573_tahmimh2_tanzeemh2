@@ -21,8 +21,18 @@ CREATE TABLE IF NOT EXISTS blogs (
         content TEXT,
         author TEXT,
         datePublished TEXT,
-        userKey TEXT
+        userKey TEXT,
+        pastauthors TEXT
         );
 ''')
 db.commit()
 db.close()
+
+
+
+def checkUser(name, password, storykey):
+    db=sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT pastauthors, FROM blogs WHERE title = ?", (storykey, ))
+    
+    if user is none:
