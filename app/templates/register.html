@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> REGISTER </title>
+    </head>
+
+    <body>
+        <h1>Please Register</h1>
+
+        <form action="/auth_reg" method="POST">
+            <input type="text" name="new_user" placeholder="New Username">
+            <input type="text" name="new_pass" placeholder="New Password">
+            <input type="submit" name="register" value="Register">
+        </form>
+
+        <form action="/login">
+            <input type="submit" name="return" value="Go Back">
+        </form>
+
+        <p style="color: red"> {{ error_text }} </p> <!-- placeholder text for if the user inputs incorrect registration -->
+    </body>
+</html>

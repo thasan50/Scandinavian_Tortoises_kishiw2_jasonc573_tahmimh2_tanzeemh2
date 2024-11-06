@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title> HOME </title>
+    </head>
+
+    <body>
+        <h1>Tater Tots</h1>
+        <p>
+            {{ logged_in_text }} <!-- placeholder text for when the user has just logged in -->
+
+            {% if 'username' in session %} <!-- show different buttons depending on whether the user is logged in -->
+                <form action="/logout">
+                    <input type="submit" name="logout" value="Logout">
+                </form>
+
+            {% else %}
+                <form action="/login"">
+                    <input type="submit" name="login" value="Login">
+                </form>
+            {% endif %}
+        </p>
+    </body>
+
+</html>

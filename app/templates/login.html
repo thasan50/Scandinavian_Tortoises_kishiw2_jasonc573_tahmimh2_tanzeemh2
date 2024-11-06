@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> LOGIN </title>
+    </head>
+
+    <body>
+        <h1>Please Log In</h1>
+
+        <p style="color: green"> {{ registered_text }} </p> <!-- placeholder text for when the user has just registered -->
+
+        <form action="/auth_login" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="password" placeholder="Password">
+            <input type="submit" name="submit_login" value="Login">
+        </form>
+
+        <form action="/register">
+            <input type="submit" name="register" value="Register">
+        </form>
+
+        <form action="/">
+            <input type="submit" name="return" value="Go Back">
+        </form>
+
+        <p style="color: red"> {{ error_text }} </p> <!-- placeholder text for if the user inputs incorrect login info -->
+
+    </body>
+</html>
