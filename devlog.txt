@@ -62,3 +62,7 @@ kwijaya50 -- 2024-11-05
 - started working on the css
 - updated newStory, view, and editing htmls
 - waiting to work on linking the templates and database in class
+
+jchao50 -- 2024-11-05
+- worked on user logins and registration
+- created functional baseline program w/o styling
