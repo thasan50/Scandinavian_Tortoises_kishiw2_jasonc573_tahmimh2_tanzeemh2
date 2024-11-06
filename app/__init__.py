@@ -85,18 +85,20 @@ def logout():
 
 
 # STORIES
-@app.route('/view')
-def view():
-
-    return "Viewing stories goes here"
-
-@app.route('/create')
-def create():
-    return "Creating stories goes here"
-
-@app.route('/edit')
+@app.route("/view/" + ttl)
 def edit():
-    return "Editing stories goes here"
+    if user:
+        return render_template( 'view.html', username = user, storyname = ttl, content = story)
+    return render_template(' account.html ')
+
+@app.route("/newstory")
+def newstory():
+    return render_template( 'newStory.html', username = user)
+
+@app.route("/edit/" + ttl)
+def edit():
+    if user:
+        return render_template( 'editing.html', username = user, storyname = ttl, content = story)
 
 @app.route('/history')
 def history():

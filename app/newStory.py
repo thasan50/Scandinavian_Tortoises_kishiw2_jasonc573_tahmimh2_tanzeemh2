@@ -16,10 +16,9 @@ user = "b"
 
 
 @app.route("/newstory")
-def edit():
+def newstory():
     if user:
         return render_template( 'newStory.html', username = user)
-    return render_template(' account.html ')
 
 if __name__ == "__main__":
     app.debug = True
