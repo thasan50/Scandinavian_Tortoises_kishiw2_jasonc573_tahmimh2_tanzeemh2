@@ -88,19 +88,16 @@ content = "this is a story. I like stories. yipee!"
 
 # STORIES
 @app.route("/view/" + ttl)
-def edit():
-    if user:
-        return render_template( 'view.html', username = user, storyname = ttl, content = story)
-    return render_template(' account.html ')
+def view():
+    return render_template( 'view.html', user = session['name'], storyname = ttl, content = story)
 
 @app.route("/newstory")
 def newstory():
-    return render_template( 'newStory.html', username = user)
+    return render_template( 'newStory.html', user = session['name'])
 
 @app.route("/edit/" + ttl)
 def edit():
-    if user:
-        return render_template( 'editing.html', username = user, storyname = ttl, content = story)
+    return render_template( 'editing.html', user = session['name'], storyname = ttl, content = story)
 
 @app.route('/history')
 def history():
