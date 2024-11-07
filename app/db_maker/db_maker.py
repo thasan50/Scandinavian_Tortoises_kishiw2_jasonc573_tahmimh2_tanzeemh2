@@ -18,7 +18,7 @@ def setup():
             lastContent TEXT,
             firstAuthor TEXT,
             lastAuthor TEXT,
-            editNumber INTEGER,
+            editNumber INTEGER
         );
     ''')
     c.execute('''
