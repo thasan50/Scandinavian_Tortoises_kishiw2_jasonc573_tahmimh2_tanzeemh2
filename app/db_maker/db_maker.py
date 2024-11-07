@@ -43,7 +43,7 @@ def setup():
 def create_user(username, password):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
-    c.execute("INSERT INTO users(username, password) VALUES (?, ?, ?)", (username, password))
+    c.execute("INSERT INTO users(username, password) VALUES (?, ?)", (username, password))
     db.commit()
     db.close()
     
