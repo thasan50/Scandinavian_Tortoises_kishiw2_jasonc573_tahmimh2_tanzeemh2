@@ -77,3 +77,7 @@ thasan50 -- 2024-11-05
 thasan50 -- 2024-11-06
 - modified db_initialization (now called setup) further
 - created edit all stories, edit story, and various get functions
+
+jchao50 -- 2024-11-06
+- connected __init__.py with databases
+- fixed all errors with logins
