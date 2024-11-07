@@ -10,7 +10,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import os
 
 import sys
-sys.path.insert(0, 'app/db_maker')
+sys.path.append(os.path.join(os.path.dirname(__file__), 'db_maker'))
 import db_maker as db
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ logins = {
 }
 
 # CONNECTION TO DATABASES
-db.initialize_db()
+db.setup()
 
 # MAIN PAGE
 @app.route('/', methods=['GET','POST'])

@@ -2,40 +2,35 @@ import sqlite3
 
 DB_FILE = "stories.db" #create a database for stories
 
-def initialize_db():
-    db=sqlite3.connect(DB_FILE, check_same_thread=False)
-    c = db.cursor() #facilitate database operators to trigger db events
-
-    c.execute(
-    '''
-    CREATE TABLE IF NOT EXISTS users (
+def setup():
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS users (
             username TEXT PRIMARY KEY,
-            password TEXT,
-            );
+            password TEXT
+        );
     ''')
-    c.execute(
-    '''
-    CREATE TABLE IF NOT EXISTS allStories (
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS allStories (
             storyID INTEGER
             title TEXT,
             lastContent TEXT,
             firstAuthor TEXT,
             lastAuthor TEXT,
             editNumber INTEGER,
-            PRIMARY KEY(storyID, title)
-            );
+        );
     ''')
-    c.execute(
-    '''
-    CREATE TABLE IF NOT EXISTS storyData (
-            storyID INTEGER PRIMARY KEY AUTOINCREMENT,
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS storyData (
+            storyID INTEGER,
             title TEXT NOT NULL UNIQUE,
             storyContent TEXT,
+            allAuthors TEXT,
             lastContent TEXT,
             lastAuthor TEXT,
             editNumber INTEGER
-            FOREIGN KEY(storyID) REFERENCES allStories(storyID)
-            );
+        );
     ''')
     db.commit()
     db.close()
