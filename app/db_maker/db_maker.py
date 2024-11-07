@@ -86,7 +86,6 @@ def edit_all_stories(story_id, lastContent, lastAuthor):
         db.close()
         edit_story(story_id, lastContent, lastAuthor)
     
-    
 def edit_story(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
