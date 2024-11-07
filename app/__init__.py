@@ -146,13 +146,13 @@ def newstory():
         # Save the story ID in the session
         session['storyID'] = story_id
         # Redirect to the newly created story's view page
-        return redirect(url_for('view_story'))
+        return redirect(url_for('view'))
     return render_template('newStory.html', user=session['username'])
 
 @app.route("/edit/<title>", methods=["GET", "POST"])
 def edit(title):
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login.html'))
     # Retrieve story ID from the session
     story_id = session.get('storyID')
     if request.method == 'POST':
@@ -171,7 +171,7 @@ def edit(title):
         db.commit()
         db.close()
         # Redirect to the view page after updating the story
-        return redirect(url_for('view_story'))
+        return redirect(url_for('view'))
     # Searcjes fpr the story using the storyID
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
