@@ -25,7 +25,7 @@ logins = {
 }
 
 # CONNECTION TO DATABASES
-db.initialize_db()
+db.setup()
 
 # MAIN PAGE
 @app.route('/', methods=['GET','POST'])
