@@ -34,6 +34,7 @@ def initializeDB():
                 lastContent TEXT,
                 lastAuthor TEXT,
                 editNumber INTEGER
+                FOREIGN KEY(storyID) REFERENCES allStories(storyID)
                 );
         ''')
         db.commit()
@@ -45,6 +46,13 @@ def createUser(username, password):
         c.execute("INSERT INTO users(username, password) VALUES (?, ?, ?)", (username, password))
         db.commit()
         db.close()
+def verifyuser(username, password):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+    user = c.fetchone()
+    db.close()
+    return user is not None
 def addToAllStories(title, storyContent, author):
         db=sqlite3.connect(DB_FILE, check_same_thread=False)
         c = db.cursor() 
@@ -58,6 +66,19 @@ def createStory(title, storyContent, firstAuthor):
         c.execute("INSERT INTO storyData(title, storyContent, lastContent, author, editNumber) VALUES(?, ?, ?, ?, ?)", (title, storyContent, storyContent, firstAuthor, 0))
         db.commit()
         db.close()
+def getuserStory(username):
+       db = sqlite3.connect(DB_FILE, check_same_thread=False)
+       c=db.cursor()
+       c.execute('''
+                 SELECT DISTINCT allStories.storyID, allStories.title, allstories.lastContent
+                 FROM allStories
+                 JOIN storyData ON allStories.storyID = storyData.StoryID
+                 WHERE storyData.author = ?
+                 ''', (username,)
+       )
+       stories - c.fetchall()
+       db.close()
+       return stories
 def editAllStories(story_id, lastContent, lastAuthor):
         db=sqlite3.connect(DB_FILE, check_same_thread=False)
         c = db.cursor() 
