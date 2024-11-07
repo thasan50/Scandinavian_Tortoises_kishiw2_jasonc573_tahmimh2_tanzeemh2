@@ -26,25 +26,13 @@
                     <input type="submit" name="newstory" value="Create a New Story!">
                 </form>
 	</div2>
-    <divtxt>
-        {% if stories %}
-        <ul>
-            {% for i in stories %}
-            <li>
-                <p>{{i[0]}}</p>
-            </li>
-            {% endfor %}
-        </ul>
-            
-    </divtxt>
-        {% else %}
+            {% else %}
 	<div1>
-                <form action="/login">
+                <form action="/login"">
                     <input type="submit" name="login" value="Login">
                 </form>
 	</div1>
-        {% endif %}
-        {% endif %}
+            {% endif %}
         </p>
 	</div>
     </body>
