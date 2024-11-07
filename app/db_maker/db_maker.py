@@ -31,6 +31,7 @@ def initialize_db():
             storyID INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL UNIQUE,
             storyContent TEXT,
+            allAuthors TEXT,
             lastContent TEXT,
             lastAuthor TEXT,
             editNumber INTEGER
@@ -63,14 +64,12 @@ def add_to_all_stories(title, storyContent, author):
     db.commit()
     db.close()
     create_story(title, storyContent, author)
-    
 def create_story(title, storyContent, firstAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
-    c.execute("INSERT INTO storyData(title, storyContent, lastContent, author, editNumber) VALUES(?, ?, ?, ?, ?)", (title, storyContent, storyContent, firstAuthor, 0))
+    c.execute("INSERT INTO storyData(title, storyContent, allAuthors, lastContent, lastAuthor, editNumber) VALUES(?, ?, ?, ?, ?, ?)", (title, storyContent, firstAuthor, storyContent, firstAuthor, 0))
     db.commit()
     db.close()
-        
 def get_user_story(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c=db.cursor()
@@ -79,27 +78,33 @@ def get_user_story(username):
         FROM allStories
         JOIN storyData ON allStories.storyID = storyData.StoryID
         WHERE storyData.author = ?
-        ''', (username,)
+        ''', (username)
     )
     stories - c.fetchall()
     db.close()
     return stories
-   
 def edit_all_stories(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
     edit = editNumber+1
-    c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", lastContent, lastAuthor, edit)
+    c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", (lastContent, lastAuthor, edit, story_id))
     db.commit()
     db.close()
-    editStory(story_id, lastContent, lastAuthor)
+    edit_story(story_id, lastContent, lastAuthor)
     
 def edit_story(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     temp = storyContent + "\n" + lastContent
-    c.execute("UPDATE storyData SET storyContent=?, lastContent=?, lastAuthor=? WHERE storyID=?", temp, lastContent, lastAuthor, story_id)
+    temp2 = get_authors() + ", " + lastAuthor
+    c.execute("UPDATE storyData SET storyContent=?, allAuthors=?, lastContent=?, lastAuthor=? WHERE storyID=?", (temp, temp2, lastContent, lastAuthor, story_id))
     db.commit()
     db.close()
-
+def get_authors(story_id):
+    db=sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    result = c.execute("SELECT allAuthors FROM storyData WHERE storyID=?", (story_id))
+    db.commit()
+    db.close()
+    return result
 # If a title is in the database, I need to tell the user to pick another title
