@@ -129,6 +129,8 @@ def newstory():
         title = request.form['title']
         entry = request.form['entry']
         user_id = session['username']
+        print(title)
+        print(entry)
         # adding the new story to the database
         db = sqlite3.connect(DB_FILE)
         c = db.cursor()
