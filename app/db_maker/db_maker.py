@@ -94,5 +94,11 @@ def editStory(story_id, lastContent, lastAuthor):
         c.execute("UPDATE storyData SET storyContent=?, lastContent=?, lastAuthor=? WHERE storyID=?", temp, lastContent, lastAuthor, story_id)
         db.commit()
         db.close()
-
+def getlast(story_id):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    c.execute("SELECT lastContent FROM allStories WHERE storyID = ?", (story_id,)) #selects latest content from the story corresponding to the storyID
+    latestupdate = c.fetchone()
+    db.close()
+    return latest_update[0] if latest_update else None
 # If a title is in the database, I need to tell the user to pick another title
