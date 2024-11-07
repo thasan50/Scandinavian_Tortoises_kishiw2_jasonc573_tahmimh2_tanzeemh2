@@ -73,11 +73,19 @@ def create_story(title, storyContent, firstAuthor):
 def edit_all_stories(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
-    edit = get_edit_number(story_id)+1
-    c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", (lastContent, lastAuthor, edit, story_id))
-    db.commit()
-    db.close()
-    edit_story(story_id, lastContent, lastAuthor)
+    string_of_authors = get_authors(story_id)
+    list_of_authors = string_of_authors.split(", ")
+    if lastAuthor in list_of_authors:
+        db.commit()
+        db.close()
+        return "You've already edited this story"
+    else:
+        edit = get_edit_number(story_id)+1
+        c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", (lastContent, lastAuthor, edit, story_id))
+        db.commit()
+        db.close()
+        edit_story(story_id, lastContent, lastAuthor)
+    
     
 def edit_story(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
