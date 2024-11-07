@@ -1,0 +1,22 @@
+h1 {
+  text-align: center;
+  padding-top: 10px;
+  background-color: #D7A6B3;
+  padding-bottom: 20px;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+p {
+  padding-left: 10px;
+  padding-top: 5px;
+  text-align: justify;
+  background-color: #E5CDC8;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: #E5CDC8;
+  font-family: "Times New Roman", Times, serif;
+}
