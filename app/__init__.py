@@ -8,10 +8,11 @@ Time Spent: 8 hours
 
 from flask import Flask, render_template, request, session, redirect, url_for
 import os
-
+import sqlite3
 import sys
 sys.path.insert(0, 'db_maker/') # when running __init__.py, user MUST be in project root directory
 import db_maker as db
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -95,8 +96,8 @@ def logout():
 
 
 # STORIES
-@app.route("/view/<ttl>")
-def view(ttl):
+@app.route("/view/<title>")
+def view(title):
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -148,8 +149,8 @@ def newstory():
         return redirect(url_for('view_story'))
     return render_template('newStory.html', user=session['username'])
 
-@app.route("/edit/<ttl>", methods=["GET", "POST"])
-def edit(ttl):
+@app.route("/edit/<title>", methods=["GET", "POST"])
+def edit(title):
     if 'username' not in session:
         return redirect(url_for('login'))
     # Retrieve story ID from the session
