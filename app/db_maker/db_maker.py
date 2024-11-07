@@ -58,9 +58,20 @@ def createStory(title, storyContent, firstAuthor):
         c.execute("INSERT INTO storyData(title, storyContent, lastContent, author, editNumber) VALUES(?, ?, ?, ?, ?)", (title, storyContent, storyContent, firstAuthor, 0))
         db.commit()
         db.close()
+def editAllStories(story_id, lastContent, lastAuthor):
+        db=sqlite3.connect(DB_FILE, check_same_thread=False)
+        c = db.cursor() 
+        edit = editNumber+1
+        c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", lastContent, lastAuthor, edit)
+        db.commit()
+        db.close()
+        editStory(story_id, lastContent, lastAuthor)
 def editStory(story_id, lastContent, lastAuthor):
         db=sqlite3.connect(DB_FILE, check_same_thread=False)
         c = db.cursor()
-        c.execute("UPDATE storyData")
+        temp = storyContent + "\n" + lastContent
+        c.execute("UPDATE storyData SET storyContent=?, lastContent=?, lastAuthor=? WHERE storyID=?", temp, lastContent, lastAuthor, story_id)
+        db.commit()
+        db.close()
 
 # If a title is in the database, I need to tell the user to pick another title
