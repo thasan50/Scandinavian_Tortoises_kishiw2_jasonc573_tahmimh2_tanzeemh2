@@ -78,8 +78,11 @@ def auth_reg():
         else:
             # ADD USERNAME AND PASSWORD AS NEW ROW IN USER DB
             # logins[new_username] = new_password
-            db.create_user(new_username, new_password)
-            return render_template("login.html", registered_text="You are now registered! Please log in.")
+            try: 
+                db.create_user(new_username, new_password)
+                return render_template("login.html", registered_text="You are now registered! Please log in.")
+            except:
+                return render_template("register.html", error_text="Username already exists.")
     else:
         return None
 
