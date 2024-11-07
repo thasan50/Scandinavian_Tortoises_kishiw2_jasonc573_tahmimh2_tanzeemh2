@@ -10,13 +10,13 @@ def initialize_db():
     '''
     CREATE TABLE IF NOT EXISTS users (
             username TEXT PRIMARY KEY,
-            password TEXT,
+            password TEXT
             );
     ''')
     c.execute(
     '''
     CREATE TABLE IF NOT EXISTS allStories (
-            storyID INTEGER
+            storyID INTEGER,
             title TEXT,
             lastContent TEXT,
             firstAuthor TEXT,
@@ -34,7 +34,7 @@ def initialize_db():
             allAuthors TEXT,
             lastContent TEXT,
             lastAuthor TEXT,
-            editNumber INTEGER
+            editNumber INTEGER,
             FOREIGN KEY(storyID) REFERENCES allStories(storyID)
             );
     ''')
@@ -72,20 +72,6 @@ def create_story(title, storyContent, firstAuthor):
     db.commit()
     db.close()
 
-def get_user_story(username):
-    db = sqlite3.connect(DB_FILE, check_same_thread=False)
-    c=db.cursor()
-    c.execute('''
-        SELECT DISTINCT allStories.storyID, allStories.title, allstories.lastContent
-        FROM allStories
-        JOIN storyData ON allStories.storyID = storyData.StoryID
-        WHERE storyData.author = ?
-        ''', (username)
-    )
-    stories = c.fetchall()
-    db.close()
-    return stories
-
 def edit_all_stories(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
@@ -104,10 +90,40 @@ def edit_story(story_id, lastContent, lastAuthor):
     db.commit()
     db.close()
 
+def get_user_story(username):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c=db.cursor()
+    c.execute('''
+        SELECT DISTINCT allStories.storyID, allStories.title, allstories.lastContent
+        FROM allStories
+        JOIN storyData ON allStories.storyID = storyData.StoryID
+        WHERE storyData.author = ?
+        ''', (username)
+    )
+    stories = c.fetchall()
+    db.close()
+    return stories
+
 def get_authors(story_id):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     result = c.execute("SELECT allAuthors FROM storyData WHERE storyID=?", (story_id))
+    db.commit()
+    db.close()
+    return result
+
+def get_story_content(story_id):
+    db=sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    result = c.execute("SELECT storyContent FROM storyData WHERE storyID=?", (story_id))
+    db.commit()
+    db.close()
+    return result
+
+def get_story_ID(title):
+    db=sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    result = c.execute("SELECT storyID FROM storyData WHERE title=?", (title))
     db.commit()
     db.close()
     return result
