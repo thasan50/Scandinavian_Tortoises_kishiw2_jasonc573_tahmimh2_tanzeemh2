@@ -6,7 +6,12 @@
     <title> {{ storyname }} </title>
   </head>
 
-  <nav> <button form = Home type = home> Home </button> </nav>
+  <nav>
+    <form action = "/">
+        <input type="submit" name="return" value ="Home">
+    </form>
+
+ </nav>
 
   <body>
     <h1> {{ storyname }} </h>
@@ -26,6 +31,6 @@ Add the next part of the story here!
   </body>
   
 
-  <footer> You are currently logged in as {{ username }} </footer>
+  <footer> You are currently logged in as {{ user }} </footer>
 
 </html>

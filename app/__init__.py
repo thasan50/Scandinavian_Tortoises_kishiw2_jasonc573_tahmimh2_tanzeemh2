@@ -7,13 +7,14 @@ Time Spent: 0.2
 '''
 
 from flask import Flask, render_template, request, session, redirect, url_for
+import sqlite3 # for accessing DBs
 import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 # placeholder example logins (until we have functioning databases)
-logins = { 
+logins = {
     "jason" : "chao",
     "kishi" : "wijaya",
     "tahmim" : "hassan",
@@ -31,7 +32,7 @@ def home():
     # print(request.args)
     if 'username' in session:
         return render_template("home.html", logged_in_text="Welcome " + session['name'])
-    else: 
+    else:
         return render_template('home.html')
 
 # USER LOGIN
@@ -79,22 +80,24 @@ def auth_reg():
 def logout():
     session.pop('username', None)
     session.pop('name', None)
-    return render_template("home.html")
+    return redirect("/")
 
+ttl = "title"
+content = "this is a story. I like stories. yipee!"
 
 
 # STORIES
-@app.route('/view')
+@app.route("/view/" + ttl)
 def view():
-    return "Viewing stories goes here"
+    return render_template( 'view.html', user = session['name'], storyname = ttl, content = story)
 
-@app.route('/create')
-def create():
-    return "Creating stories goes here"
+@app.route("/newstory")
+def newstory():
+    return render_template( 'newStory.html', user = session['name'])
 
-@app.route('/edit')
+@app.route("/edit/" + ttl)
 def edit():
-    return "Editing stories goes here"
+    return render_template( 'editing.html', user = session['name'], storyname = ttl, content = story)
 
 @app.route('/history')
 def history():
