@@ -38,9 +38,7 @@ def home():
     # print("=====================\n")
     # print(request.args)
     if 'username' in session:
-        name = session['username']
-        stories = db.get_user_story(name)
-        return render_template("home.html", logged_in_text="Welcome " + session['name'], stories=stories) 
+        return render_template("home.html", logged_in_text="Welcome " + session['name']) 
     else:
         return render_template('home.html')
 
