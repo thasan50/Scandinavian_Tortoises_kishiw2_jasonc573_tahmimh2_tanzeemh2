@@ -7,8 +7,11 @@ Time Spent: 0.2
 '''
 
 from flask import Flask, render_template, request, session, redirect, url_for
-import sqlite3 # for accessing DBs
 import os
+
+import sys
+sys.path.insert(0, 'app/db_maker')
+import db_maker as db
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -20,6 +23,9 @@ logins = {
     "tahmim" : "hassan",
     "tanzeem" : "hasan",
 }
+
+# CONNECTION TO DATABASES
+db.initialize_db()
 
 # MAIN PAGE
 @app.route('/', methods=['GET','POST'])
@@ -46,7 +52,8 @@ def auth_login():
         # if username and password match in USER DB, then...
         username = request.form['username']
         password = request.form['password']
-        if username in logins and logins[username] == password:
+        if db.verify_user(username, password):
+        # if username in logins and logins[username] == password:
             session['username'] = 'username'
             session['name'] = username
             return redirect('/')
@@ -70,7 +77,8 @@ def auth_reg():
             return render_template("register.html", error_text="Please provide a new password of at least 8 characters.")
         else:
             # ADD USERNAME AND PASSWORD AS NEW ROW IN USER DB
-            logins[new_username] = new_password
+            # logins[new_username] = new_password
+            db.create_user(new_username, new_password)
             return render_template("login.html", registered_text="You are now registered! Please log in.")
     else:
         return None
