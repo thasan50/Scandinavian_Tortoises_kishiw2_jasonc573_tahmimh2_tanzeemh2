@@ -10,7 +10,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import os
 
 import sys
-sys.path.insert(0, 'app/db_maker')
+sys.path.insert(0, 'db_maker/') # when running __init__.py, user MUST be in project root directory
 import db_maker as db
 
 app = Flask(__name__)
