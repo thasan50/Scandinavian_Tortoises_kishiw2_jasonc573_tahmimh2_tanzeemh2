@@ -93,9 +93,6 @@ def logout():
     session.pop('name', None)
     return redirect("/")
 
-ttl = "title"
-content = "this is a story. I like stories. yipee!"
-
 
 # STORIES
 @app.route("/view/" + ttl)
