@@ -133,4 +133,4 @@ def get_edit_number(story_id):
     db.commit()
     db.close()
     return result
-# If a title is in the database, I need to tell the user to pick another title
+
