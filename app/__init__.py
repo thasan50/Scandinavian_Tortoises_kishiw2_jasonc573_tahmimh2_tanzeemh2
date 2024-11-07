@@ -118,7 +118,7 @@ def view(title):
     if not story:
         return "Story not found", 404
     story_content, title, last_entry = story
-    return render_template('viewStory.html', story=story_content, title=title, lastentry=last_entry)
+    return render_template('view.html', story=story_content, title=title, lastentry=last_entry)
 
 @app.route("/newstory", methods=["GET", "POST"])
 def newstory():
