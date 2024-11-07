@@ -5,24 +5,17 @@ DB_FILE = "stories.db" #create a database for stories
 def setup():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
+    
     c.execute('''
         CREATE TABLE IF NOT EXISTS users (
             username TEXT PRIMARY KEY,
             password TEXT
-<<<<<<< HEAD
-            );
-    ''')
-    c.execute(
-    '''
-    CREATE TABLE IF NOT EXISTS allStories (
-            storyID INTEGER,
-=======
         );
     ''')
+    
     c.execute('''
         CREATE TABLE IF NOT EXISTS allStories (
-            storyID INTEGER
->>>>>>> de7db05809947831e3fadc6282fa5cce99eedd65
+            storyID INTEGER,
             title TEXT,
             lastContent TEXT,
             firstAuthor TEXT,
@@ -30,6 +23,7 @@ def setup():
             editNumber INTEGER
         );
     ''')
+    
     c.execute('''
         CREATE TABLE IF NOT EXISTS storyData (
             storyID INTEGER,
@@ -38,15 +32,10 @@ def setup():
             allAuthors TEXT,
             lastContent TEXT,
             lastAuthor TEXT,
-<<<<<<< HEAD
-            editNumber INTEGER,
-            FOREIGN KEY(storyID) REFERENCES allStories(storyID)
-            );
-=======
             editNumber INTEGER
         );
->>>>>>> de7db05809947831e3fadc6282fa5cce99eedd65
     ''')
+    
     db.commit()
     db.close()
     
