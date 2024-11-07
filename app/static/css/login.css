@@ -9,15 +9,16 @@ h1 {
   text-align: center;
   margin-top: 0px;
   background-color: #D7A6B3;
-  padding-bottom: 20px;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
   font-size: 50px;
   font-family: "Times New Roman", Times, serif;
 }
 
 div {
-  margin-left: 20px;
-  padding-left: 10px;
-  padding-top: 5px;
+  margin-left: 3%;
+  padding-left: 2%px;
+  padding-top: 1%px;
   text-align: justify;
   background-color: #E5CDC8;
   font-size: 20px;
@@ -26,11 +27,21 @@ div {
 
 div1{
   position: fixed;
-  top: 200px;
+  top: 20%;
 }
 
 div2{
   position: fixed;
-  top: 200px;
-  left: 100px;
+  top: 20%;
+  left: 10%;
+}
+
+p{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+divtxt{
+  position: fixed;
+  top: 8%;
 }

@@ -9,24 +9,32 @@
 
     <body>
         <h1>Tater Tots</h1>
-        <p>
+        <p> 
+	<div>
+	<divtxt>
             {{ logged_in_text }} <!-- placeholder text for when the user has just logged in -->
+	</divtxt>
 
             {% if 'username' in session %} <!-- show different buttons depending on whether the user is logged in -->
-                <form action="/logout">
+        <div1>
+		<form action="/logout">
                     <input type="submit" name="logout" value="Logout">
                 </form>
-
+	</div1>
+	<div2>
                 <form action="/newstory">
                     <input type="submit" name="newstory" value="Create a New Story!">
                 </form>
-
+	</div2>
             {% else %}
+	<div1>
                 <form action="/login"">
                     <input type="submit" name="login" value="Login">
                 </form>
+	</div1>
             {% endif %}
         </p>
+	</div>
     </body>
 
 </html>
