@@ -64,12 +64,14 @@ def add_to_all_stories(title, storyContent, author):
     db.commit()
     db.close()
     create_story(title, storyContent, author)
+
 def create_story(title, storyContent, firstAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
     c.execute("INSERT INTO storyData(title, storyContent, allAuthors, lastContent, lastAuthor, editNumber) VALUES(?, ?, ?, ?, ?, ?)", (title, storyContent, firstAuthor, storyContent, firstAuthor, 0))
     db.commit()
     db.close()
+
 def get_user_story(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c=db.cursor()
@@ -80,9 +82,10 @@ def get_user_story(username):
         WHERE storyData.author = ?
         ''', (username)
     )
-    stories - c.fetchall()
+    stories = c.fetchall()
     db.close()
     return stories
+
 def edit_all_stories(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
@@ -100,6 +103,7 @@ def edit_story(story_id, lastContent, lastAuthor):
     c.execute("UPDATE storyData SET storyContent=?, allAuthors=?, lastContent=?, lastAuthor=? WHERE storyID=?", (temp, temp2, lastContent, lastAuthor, story_id))
     db.commit()
     db.close()
+
 def get_authors(story_id):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
