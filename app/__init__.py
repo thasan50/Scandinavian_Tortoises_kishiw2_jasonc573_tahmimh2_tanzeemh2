@@ -52,9 +52,8 @@ def auth_login():
         # if username and password match in USER DB, then...
         username = request.form['username']
         password = request.form['password']
-        if 
-        
-        if username in logins and logins[username] == password:
+        if db.verify_user(username, password):
+        # if username in logins and logins[username] == password:
             session['username'] = 'username'
             session['name'] = username
             return redirect('/')

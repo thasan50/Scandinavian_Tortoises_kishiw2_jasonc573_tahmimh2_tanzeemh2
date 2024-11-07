@@ -54,7 +54,7 @@ def verify_user(username, password):
     c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
     user = c.fetchone()
     db.close()
-    return user is not None
+    return user is not None # returns true if the user is in the database
 
 def add_to_all_stories(title, storyContent, author):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
