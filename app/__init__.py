@@ -37,7 +37,7 @@ def home():
     # print("=====================\n")
     # print(request.args)
     if 'username' in session:
-        return render_template("home.html", logged_in_text="Welcome " + session['name'] + db.get_user_story('username')) 
+        return render_template("home.html", logged_in_text="Welcome " + session['name']) 
     else:
         return render_template('home.html')
 
@@ -95,21 +95,96 @@ def logout():
 
 
 # STORIES
-@app.route("/view/" + ttl)
-def view():
-    return render_template( 'view.html', user = session['name'], storyname = ttl, content = story)
+@app.route("/view/<ttl>")
+def view(ttl):
+    if 'username' not in session:
+        return redirect(url_for('login'))
 
-@app.route("/newstory")
+    # gets story id from url 
+    story_id = session.get('storyID')
+    if request.args.get('id'):
+        story_id = request.args.get('id')
+        session['storyID'] = story_id
+
+    # uses story Id to get story data
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT storyContent, title, lastContent FROM storyData WHERE storyID = ?", (story_id,))
+    story = c.fetchone()
+    db.close()
+    if not story:
+        return "Story not found", 404
+    story_content, title, last_entry = story
+    return render_template('viewStory.html', story=story_content, title=title, lastentry=last_entry)
+
+@app.route("/newstory", methods=["GET", "POST"])
 def newstory():
-    return render_template( 'newStory.html', user = session['name'])
+    # Check if the user is logged in
+    if 'username' not in session:
+        return redirect(url_for('login'))
 
-@app.route("/edit/" + ttl)
-def edit():
-    return render_template( 'editing.html', user = session['name'], storyname = ttl, content = story)
+    if request.method == 'POST':
+        # takes data from form
+        title = request.form['title']
+        entry = request.form['entry']
+        user_id = session['username']
+        # adding the new story to the database
+        db = sqlite3.connect(DB_FILE)
+        c = db.cursor()
+        # Find the next story ID by checking the maximum current storyID
+        c.execute("SELECT MAX(storyID) FROM storyData")
+        result = c.fetchone()
+        story_id = (result[0] + 1) if result[0] is not None else 1
+        # Insert the new story into storyData
+        c.execute('''
+            INSERT INTO storyData (storyID, title, storyContent, allAuthors, lastContent, lastAuthor, editNumber)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (story_id, title, entry, user_id, entry, user_id, 1))
+        db.commit()
+        db.close()
+        # Save the story ID in the session
+        session['storyID'] = story_id
+        # Redirect to the newly created story's view page
+        return redirect(url_for('view_story'))
+    return render_template('newStory.html', user=session['username'])
+
+@app.route("/edit/<ttl>", methods=["GET", "POST"])
+def edit(ttl):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    # Retrieve story ID from the session
+    story_id = session.get('storyID')
+    if request.method == 'POST':
+        # Get the new entry from the form
+        new_entry = request.form['content']
+        user_id = session['username']
+        # Update the story in the database
+        db = sqlite3.connect(DB_FILE)
+        c = db.cursor()
+        # Update the story content
+        c.execute('''
+            UPDATE storyData
+            SET storyContent = storyContent || '\n' || ?, lastContent = ?, lastAuthor = ?, editNumber = editNumber + 1
+            WHERE storyID = ?
+        ''', (new_entry, new_entry, user_id, story_id))
+        db.commit()
+        db.close()
+        # Redirect to the view page after updating the story
+        return redirect(url_for('view_story'))
+    # Searcjes fpr the story using the storyID
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT lastContent FROM storyData WHERE storyID = ?", (story_id,))
+    last_entry = c.fetchone()
+    db.close()
+    if not last_entry:
+        return "Story not found", 404
+    return render_template('editing.html', lastentry=last_entry[0], user=session['username'])
 
 @app.route('/history')
 def history():
-    return "View edit histories here"
+    stories = db.get_all_stories()  # Fetch all stories from the database
+    return render_template('existing.html', user=session['name'], stories=stories)
 
 if __name__ == "__main__":
     app.debug = True
