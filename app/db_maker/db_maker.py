@@ -73,7 +73,7 @@ def create_story(title, storyContent, firstAuthor):
 def edit_all_stories(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor() 
-    edit = editNumber+1
+    edit = get_edit_number(story_id)+1
     c.execute("UPDATE allStories SET lastContent=?, lastAuthor=?, editNumber=? WHERE storyID=?", (lastContent, lastAuthor, edit, story_id))
     db.commit()
     db.close()
@@ -82,7 +82,7 @@ def edit_all_stories(story_id, lastContent, lastAuthor):
 def edit_story(story_id, lastContent, lastAuthor):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    temp = storyContent + "\n" + lastContent
+    temp = get_story_content(story_id) + "\n" + lastContent
     temp2 = get_authors() + ", " + lastAuthor
     c.execute("UPDATE storyData SET storyContent=?, allAuthors=?, lastContent=?, lastAuthor=? WHERE storyID=?", (temp, temp2, lastContent, lastAuthor, story_id))
     db.commit()
@@ -122,6 +122,14 @@ def get_story_ID(title):
     db=sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     result = c.execute("SELECT storyID FROM storyData WHERE title=?", (title))
+    db.commit()
+    db.close()
+    return result
+
+def get_edit_number(story_id):
+    db=sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    result = c.execute("SELECT editNumber FROM storyData WHERE storyID=?", (story_id))
     db.commit()
     db.close()
     return result
