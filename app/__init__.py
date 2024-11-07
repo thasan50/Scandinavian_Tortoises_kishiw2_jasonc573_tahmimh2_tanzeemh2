@@ -2,8 +2,8 @@
 Swedish Fish - Kishi Wijaya, Jason Chao, Tahmim Hassan, Tanzeem Hasan
 SoftDev
 P00: Move Slowly and Fix Things
-2024-10-30
-Time Spent: 0.2
+2024-11-06
+Time Spent: 8 hours
 '''
 
 from flask import Flask, render_template, request, session, redirect, url_for
@@ -37,7 +37,7 @@ def home():
     # print("=====================\n")
     # print(request.args)
     if 'username' in session:
-        return render_template("home.html", logged_in_text="Welcome " + session['name'])
+        return render_template("home.html", logged_in_text="Welcome " + session['name'] + db.get_user_story('username')) 
     else:
         return render_template('home.html')
 
