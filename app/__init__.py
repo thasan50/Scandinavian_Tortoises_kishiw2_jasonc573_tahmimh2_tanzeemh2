@@ -15,15 +15,15 @@ import db_maker as db
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom(32)
 
-# placeholder example logins (until we have functioning databases)
-logins = {
-    "jason" : "chao",
-    "kishi" : "wijaya",
-    "tahmim" : "hassan",
-    "tanzeem" : "hasan",
-}
+# app.secret_key = os.urandom(32)
+# # placeholder example logins (until we have functioning databases)
+# logins = {
+#     "jason" : "chao",
+#     "kishi" : "wijaya",
+#     "tahmim" : "hassan",
+#     "tanzeem" : "hasan",
+# }
 
 # CONNECTION TO DATABASES
 db.setup()
@@ -53,10 +53,11 @@ def auth_login():
         # if username and password match in USER DB, then...
         username = request.form['username']
         password = request.form['password']
+        app.secret_key = os.urandom(32)
         if db.verify_user(username, password):
         # if username in logins and logins[username] == password:
             session['username'] = username
-            # session['name'] = username
+            session['name'] = username
             return redirect('/')
             # return render_template("home.html", logged_in_text="Welcome " + username)
         else:
