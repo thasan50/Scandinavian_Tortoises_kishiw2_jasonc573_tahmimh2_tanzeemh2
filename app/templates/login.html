@@ -1,46 +1,28 @@
 <!DOCTYPE html>
-
-<style>
-.content {
-  max-width: 500px;
-  margin: auto;
-}
-</style>
-
 <html>
-    <head>
-	<link rel="stylesheet" href="static/css/login.css">
-        <title> LOGIN </title>
-    </head>
-
-    <body>
-        <h1>Please Log In</h1>
-
-	<div>
-		<divtxt>
-        <p style="color: green"> {{ registered_text }} </p> <!-- placeholder text for when the user has just registered -->
-		</divtxt>
+<head>
+    <link rel="stylesheet" href="static/css/login.css">
+    <title>LOGIN</title>
+</head>
+<body>
+    <h1>Please Log In</h1>
+    <div>
+        <p style="color: green">{{ registered_text }}</p>
         <form action="/auth_login" method="POST">
-            <input type="text" name="username" placeholder="Username">
-		<br>
-            <input type="text" name="password" placeholder="Password">
+            <input type="text" name="username" placeholder="Username"><br>
+            <input type="password" name="password" placeholder="Password">
             <input type="submit" name="submit_login" value="Login">
         </form>
-	
-	<div1>
+        
         <form action="/register">
             <input type="submit" name="register" value="Register">
         </form>
-	</div1>
 
-	<div2>
         <form action="/">
             <input type="submit" name="return" value="Go Back">
         </form>
-	</div2>
-		<divtxt>
-        <p style="color: red"> {{ error_text }} </p> <!-- placeholder text for if the user inputs incorrect login info -->
-		</divtxt>
-	<div>
-    </body>
+
+        <p style="color: red">{{ error_text }}</p>
+    </div>
+</body>
 </html>
