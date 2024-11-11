@@ -15,7 +15,7 @@ import db_maker as dbx
 DB_FILE = "stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
 
-# app.secret_key = os.urandom(32)
+app.secret_key = os.urandom(32)
 # # placeholder example logins (until we have functioning databases)
 # logins = {
 #     "jason" : "chao",
@@ -96,25 +96,26 @@ def logout():
 # STORIES
 @app.route("/view/<title>")
 def view(title):
+    # It's clear that the story content, title and other details are not displayed when on their page
     if 'username' not in session:
         return redirect(url_for('login'))
 
     # gets story id from url 
-    story_id = session.get('storyID')
-    if request.args.get('id'):
-        story_id = request.args.get('id')
-        session['storyID'] = story_id
+    # story_id = session.get('storyID')
+    # if request.args.get('id'): # Where is id ever referenced, in html or python? I can't find it
+    #     story_id = request.args.get('id')
+    #     session['storyID'] = story_id
 
-    # uses story Id to get story data
+    # # uses story title to get story data
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT storyContent, title, lastContent FROM storyData WHERE storyID = ?", (story_id,))
+    c.execute("SELECT storyContent, title FROM storyData WHERE title = ?", (title,))
     story = c.fetchone()
     db.close()
     if not story:
         return "Story not found", 404
-    story_content, title, last_entry = story
-    return render_template('view.html', story=story_content, title=title, lastentry=last_entry)
+    story_content, story_title = story # Since when does it work like this?
+    return render_template('view.html', content=story_content, storyname=story_title, user=session['username']) # Isn't it a problem to have so many overlapping names?
 
 @app.route("/newstory", methods=["GET", "POST"])
 def newstory():
