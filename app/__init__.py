@@ -12,8 +12,7 @@ import sqlite3
 import sys
 sys.path.insert(0, 'db_maker/') # when running __init__.py, user MUST be in project root directory
 import db_maker as db
-
-
+DB_FILE = "stories.db"
 app = Flask(__name__)
 
 # app.secret_key = os.urandom(32)
@@ -38,7 +37,7 @@ def home():
     # print("=====================\n")
     # print(request.args)
     if 'username' in session:
-        return render_template("home.html", logged_in_text="Welcome " + session['name']) 
+        return render_template("home.html", logged_in_text="Welcome " + session['username']) 
     else:
         return render_template('home.html')
 
