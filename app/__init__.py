@@ -11,8 +11,8 @@ import os
 import sqlite3
 import sys
 sys.path.insert(0, 'db_maker/') # when running __init__.py, user MUST be in project root directory
-import db_maker as db
-DB_FILE = "stories.db"
+import db_maker as dbx
+DB_FILE = "stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
 
 # app.secret_key = os.urandom(32)
@@ -25,7 +25,7 @@ app = Flask(__name__)
 # }
 
 # CONNECTION TO DATABASES
-db.setup()
+dbx.setup() #sets up databases
 
 # MAIN PAGE
 @app.route('/', methods=['GET','POST'])
@@ -37,9 +37,10 @@ def home():
     # print("=====================\n")
     # print(request.args)
     if 'username' in session:
-        return render_template("home.html", logged_in_text="Welcome " + session['username']) 
+        return render_template("home.html", logged_in_text="Welcome " + session['username'])  # Logged in
+        # Want to print list of stories contributed to on this page
     else:
-        return render_template('home.html')
+        return render_template('home.html') # Logged out
 
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
@@ -53,12 +54,11 @@ def auth_login():
         username = request.form['username']
         password = request.form['password']
         app.secret_key = os.urandom(32)
-        if db.verify_user(username, password):
+        if dbx.verify_user(username, password):
         # if username in logins and logins[username] == password:
             session['username'] = username
             session['name'] = username
             return redirect('/')
-            # return render_template("home.html", logged_in_text="Welcome " + username)
         else:
             return render_template("login.html", error_text="Incorrect username or password.")
 
@@ -80,9 +80,9 @@ def auth_reg():
             # ADD USERNAME AND PASSWORD AS NEW ROW IN USER DB
             # logins[new_username] = new_password
             try: 
-                db.create_user(new_username, new_password)
+                dbx.create_user(new_username, new_password)
                 return render_template("login.html", registered_text="You are now registered! Please log in.")
-            except sqlite3.IntegrityError:
+            except sqlite3.IntegrityError: # I need something like this for when titles repeat
                 return render_template("register.html", error_text="Username already exists.")
 
 # USER LOGOUTS
@@ -184,7 +184,7 @@ def edit(title):
 
 @app.route('/history')
 def history():
-    stories = db.get_all_stories()  # Fetch all stories from the database
+    stories = dbx.get_all_stories()  # Fetch all stories from the database
     return render_template('existing.html', user=session['name'], stories=stories)
 
 if __name__ == "__main__":
