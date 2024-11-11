@@ -20,18 +20,23 @@
 		<form action="/logout">
                     <input type="submit" name="logout" value="Logout">
                 </form>
-	</div1>
-	<div2>
+	    </div>
+	    <div2>
                 <form action="/newstory">
                     <input type="submit" name="newstory" value="Create a New Story!">
                 </form>
-	</div2>
+	    </div2>
+        <div3>
+            <form action="/history">
+                <input type="submit" name="newstory" value="View old stories">
+            </form>
+        </div3>
             {% else %}
-	<div1>
-                <form action="/login"">
+	    <div1>
+                <form action="/login">
                     <input type="submit" name="login" value="Login">
                 </form>
-	</div1>
+	    </div1>
             {% endif %}
         </p>
 	</div>

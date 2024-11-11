@@ -185,7 +185,7 @@ def edit(title):
 
 @app.route('/history')
 def history():
-    stories = dbx.get_all_stories()  # Fetch all stories from the database
+    stories = dbx.get_user_story(session['username'])  # Fetch all stories from the database
     return render_template('existing.html', user=session['name'], stories=stories)
 
 if __name__ == "__main__":

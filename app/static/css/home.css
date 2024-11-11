@@ -26,15 +26,20 @@ div {
 }
 
 div1{
-  position: fixed;
+  position: fixed;  
   top: 20%;
 }
 
 div2{
-  position: fixed;
+  position: fixed;  
   top: 20%;
   left: 10%;
 }
+div3{
+    position: fixed;  
+    top: 20%;
+    left: 25%;
+  }
 
 p{
   margin-top: 0px;
