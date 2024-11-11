@@ -101,9 +101,9 @@ def get_user_story(username):
     c.execute('''
         SELECT DISTINCT allStories.storyID, allStories.title, allstories.lastContent
         FROM allStories
-        JOIN storyData ON allStories.storyID = storyData.StoryID
-        WHERE storyData.author = ?
-        ''', (username)
+        JOIN storyData ON allStories.storyID = storyData.storyID
+        WHERE storyData.allAuthors LIKE ?
+        ''', (f'%{username}%',)
     )
     stories = c.fetchall()
     db.close()

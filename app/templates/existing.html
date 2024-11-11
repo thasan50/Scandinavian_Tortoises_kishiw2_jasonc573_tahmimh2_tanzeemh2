@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Stories</title>
+    <link rel="stylesheet" href="static/css/existing.css">
+</head>
+<body>
+    <h1>Stories Contributed by {{ user }}</h1>
+    
+    {% if stories %}
+        <ul>
+            {% for story in stories %}
+                <li>
+                    <h2>{{ story[1] }}</h2> <!-- Story Title -->
+                    <p><strong>Last Update:</strong> {{ story[2] }}</p> <!-- Last Content -->
+                    <a href="/view/<title>">View Full Story</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not contributed to any stories yet.</p>
+    {% endif %}
+
+    <a href="/">Return to Home</a>
+</body>
+</html>
