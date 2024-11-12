@@ -10,18 +10,25 @@
             <input type="submit" name="return" value="Home">
         </form>
     </nav>
+    <div id="background">
 
-    <h1>New Story</h1>
-    <form action="/newstory" method="POST">
-        <label for="title">Title:</label><br>
-        <input type="text" name="title"><br>
+    	<h1>New Story</h1>
 
-        <label for="entry">WRITE!</label><br>
-        <textarea id="entry" name="entry" rows="4" cols="50"></textarea><br>
+    	<form action="/newstory" method="POST">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" minlength = "3" maxlength = "15"><br>
 
-        <input type="submit" name="submit" value="Submit">
-    </form>
+   	<div id ="write">
+            <label for="entry">WRITE!</label><br>
+            <textarea id="entry" name="entry" rows="4" cols="50" minlength = "10" maxlength = "200"></textarea><br>
+	</div>
+
+            <input type="submit" name="submit" value="Submit">
+    	</form>
+
+    </div>
 
     <footer> You are currently logged in as {{ user }} </footer>
+
 </body>
 </html>
