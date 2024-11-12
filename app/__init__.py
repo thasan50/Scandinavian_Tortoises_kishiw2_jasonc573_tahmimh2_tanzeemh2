@@ -69,17 +69,22 @@ def auth_reg():
         new_username = request.form['new_user']
         new_password = request.form['new_pass']
         if len(new_username) < 4:
-            return render_template("register.html", error_text="Please provide a new username of at least 4 characters.")
+            flash("Please provide a new username of at least 4 characters.", 'error')
+            return render_template("register.html")
         elif len(new_password) < 8:
-            return render_template("register.html", error_text="Please provide a new password of at least 8 characters.")
+            flash("Please provide a new password of at least 8 characters.", 'error')
+            return render_template("register.html")
+        elif new_password != request.form['confirm_pass']:
+            flash("Passwords do not match.", 'error')
+            return render_template("register.html")
         else:
-            # ADD USERNAME AND PASSWORD AS NEW ROW IN USER DB
-            # logins[new_username] = new_password
             try: 
                 dbx.create_user(new_username, new_password)
-                return render_template("login.html", registered_text="You are now registered! Please log in.")
+                flash("You are now registered! Please log in.", 'success')
+                return render_template("login.html")
             except sqlite3.IntegrityError: # I need something like this for when titles repeat
-                return render_template("register.html", error_text="Username already exists.")
+                flash("Username already exists.", 'error')
+                return render_template("register.html")
 
 # USER LOGOUTS
 @app.route('/logout', methods=["GET", "POST"])
