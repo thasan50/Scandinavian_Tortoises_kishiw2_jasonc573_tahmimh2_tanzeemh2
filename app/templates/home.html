@@ -2,44 +2,42 @@
 
 <html>
 
-    <head>
-	<link rel="stylesheet" href="static/css/home.css">
-        <title> HOME </title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap" rel="stylesheet">
+    <title>Home</title>
+</head>
 
-    <body>
-        <h1>Tater Tots</h1>
-        <p> 
-	<div>
-	<divtxt>
-            {{ logged_in_text }} <!-- placeholder text for when the user has just logged in -->
-	</divtxt>
+<body>
+    <h1 id="title">Fishing For Stories</h1>
+    <p> 
+        
+    {{ logged_in_text }} <!-- placeholder text for when the user has just logged in -->
 
-            {% if 'username' in session %} <!-- show different buttons depending on whether the user is logged in -->
-        <div1>
-		<form action="/logout">
-                    <input type="submit" name="logout" value="Logout">
-                </form>
-	    </div>
-	    <div2>
-                <form action="/newstory">
-                    <input type="submit" name="newstory" value="Create a New Story!">
-                </form>
-	    </div2>
-        <div3>
-            <form action="/history">
-                <input type="submit" name="newstory" value="View old stories">
-            </form>
-        </div3>
-            {% else %}
-	    <div1>
-                <form action="/login">
-                    <input type="submit" name="login" value="Login">
-                </form>
-	    </div1>
-            {% endif %}
-        </p>
-	</div>
-    </body>
+    {% if 'username' in session %} <!-- show different buttons depending on whether the user is logged in -->
+
+        <form action="/logout">
+                <input type="submit" name="logout" value="Logout">
+        </form>
+
+        <form action="/newstory">
+            <input type="submit" name="newstory" value="Create a New Story!">
+        </form>
+
+        <form action="/history">
+            <input type="submit" name="newstory" value="View old stories">
+        </form>
+
+    {% else %}
+        <form action="/login">
+            <input type="submit" name="login" value="Login">
+        </form>
+    {% endif %}
+    </p>
+</body>
 
 </html>

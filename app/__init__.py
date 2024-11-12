@@ -6,11 +6,11 @@ P00: Move Slowly and Fix Things
 Time Spent: 8 hours
 '''
 
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os
 import sqlite3
 import sys
-sys.path.insert(0, 'db_maker/') # when running __init__.py, user MUST be in project root directory
+sys.path.insert(0, 'db_maker') # when running __init__.py, user MUST be in project root directory
 import db_maker as dbx
 DB_FILE = "stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
@@ -30,17 +30,11 @@ dbx.setup() #sets up databases
 # MAIN PAGE
 @app.route('/', methods=['GET','POST'])
 def home():
-    # print("=====================\n")
-    # print(app)
-    # print("=====================\n")
-    # print(request)
-    # print("=====================\n")
-    # print(request.args)
     if 'username' in session:
         return render_template("home.html", logged_in_text="Welcome " + session['username'])  # Logged in
         # Want to print list of stories contributed to on this page
     else:
-        return render_template('home.html') # Logged out
+        return redirect("/login") # Logged out
 
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
@@ -58,9 +52,11 @@ def auth_login():
         # if username in logins and logins[username] == password:
             session['username'] = username
             session['name'] = username
+            flash("You were successfully logged in!")
             return redirect('/')
         else:
-            return render_template("login.html", error_text="Incorrect username or password.")
+            flash("Incorrect username or password.")
+            return redirect("/login")
 
 # USER REGISTRATIONS
 @app.route('/register', methods=['GET', 'POST'])
