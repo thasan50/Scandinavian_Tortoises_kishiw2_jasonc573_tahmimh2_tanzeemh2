@@ -3,7 +3,7 @@ Swedish Fish - Kishi Wijaya, Jason Chao, Tahmim Hassan, Tanzeem Hasan
 SoftDev
 P00: Move Slowly and Fix Things
 2024-11-06
-Time Spent: 8 hours
+Time Spent: 15 hours
 '''
 
 from flask import Flask, render_template, request, session, redirect, url_for, flash
@@ -16,13 +16,6 @@ DB_FILE = "stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)
-# # placeholder example logins (until we have functioning databases)
-# logins = {
-#     "jason" : "chao",
-#     "kishi" : "wijaya",
-#     "tahmim" : "hassan",
-#     "tanzeem" : "hasan",
-# }
 
 # CONNECTION TO DATABASES
 dbx.setup() #sets up databases
@@ -31,11 +24,10 @@ dbx.setup() #sets up databases
 @app.route('/', methods=['GET','POST'])
 def home():
     if 'username' in session:
-        return render_template("home.html", user = session['username'])  # Logged in
-        # Want to print list of stories contributed to on this page
+        return render_template("home.html", user = session['username'])
     else:
-        return redirect("/login") # Logged out
-
+        return redirect("/login")
+    
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -44,12 +36,10 @@ def login():
 @app.route('/auth_login', methods=["GET", "POST"])
 def auth_login():
     if request.method == "POST":
-        # if username and password match in USER DB, then...
         username = request.form['username']
         password = request.form['password']
         app.secret_key = os.urandom(32)
         if dbx.verify_user(username, password):
-        # if username in logins and logins[username] == password:
             session['username'] = username
             session['name'] = username
             return redirect('/')

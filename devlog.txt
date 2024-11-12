@@ -79,5 +79,9 @@ thasan50 -- 2024-11-06
 - created edit all stories, edit story, and various get functions
 
 jchao50 -- 2024-11-06
-- connected __init__.py with databases
+- connected __init__. with databases
 - fixed all errors with logins
+
+jchao50 -- 2024-11-11
+- added styling to home, login, and register pages
+- removed useless code from __init__
