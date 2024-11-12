@@ -31,7 +31,7 @@ dbx.setup() #sets up databases
 @app.route('/', methods=['GET','POST'])
 def home():
     if 'username' in session:
-        return render_template("home.html", logged_in_text="Welcome " + session['username'])  # Logged in
+        return render_template("home.html", user = session['username'])  # Logged in
         # Want to print list of stories contributed to on this page
     else:
         return redirect("/login") # Logged out
@@ -52,10 +52,9 @@ def auth_login():
         # if username in logins and logins[username] == password:
             session['username'] = username
             session['name'] = username
-            flash("You were successfully logged in!")
             return redirect('/')
         else:
-            flash("Incorrect username or password.")
+            flash("Incorrect username or password.", 'error')
             return redirect("/login")
 
 # USER REGISTRATIONS
