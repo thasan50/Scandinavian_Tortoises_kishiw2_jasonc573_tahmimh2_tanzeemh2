@@ -16,11 +16,11 @@
 
     	<form action="/newstory" method="POST">
             <label for="title">Title:</label><br>
-            <input type="text" name="title" minlength = "3" maxlength = "15"><br>
+            <input type="text" name="title" minlength = "3" maxlength = "15" required><br>
 
    	<div id ="write">
             <label for="entry">WRITE!</label><br>
-            <textarea id="entry" name="entry" rows="4" cols="50" minlength = "10" maxlength = "200"></textarea><br>
+            <textarea id="entry" name="entry" rows="4" cols="50" minlength = "10" maxlength = "200" required></textarea><br>
 	</div>
 
             <input type="submit" name="submit" value="Submit">
