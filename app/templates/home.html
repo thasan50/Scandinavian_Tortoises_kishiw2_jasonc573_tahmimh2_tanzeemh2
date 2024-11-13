@@ -2,30 +2,40 @@
 
 <html>
 
-    <head>
-        <title> HOME </title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap" rel="stylesheet">
+    <title>Home</title>
+</head>
 
-    <body>
-        <h1>Tater Tots</h1>
-        <p>
-            {{ logged_in_text }} <!-- placeholder text for when the user has just logged in -->
+<body>
+    <div id="background">
+        <h1 id="title">Fishing For Stories</h1>
+        
+        <div id="profile">
+            <p>
+                Welcome <span id="user">{{ user }}</span>.
+                <br><br>
+                <span style="font-size: 16px;">Click <a id="logout" href="/logout">here</a> to logout.</span>
+            </p>
+        </div>
 
-            {% if 'username' in session %} <!-- show different buttons depending on whether the user is logged in -->
-                <form action="/logout">
-                    <input type="submit" name="logout" value="Logout">
-                </form>
+        <div id="nav">
+            <h2>Links</h2>
+            <form action="/history">
+                <input type="submit" id="story_button" name="newstory" value="View Stories">
+            </form>
+            <br>
+            <form action="/newstory">
+                <input type="submit" id="story_button" name="newstory" value="Create Story">
+            </form>
+        </div>
 
-                <form action="/newstory">
-                    <input type="submit" name="newstory" value="Create a New Story!">
-                </form>
-
-            {% else %}
-                <form action="/login"">
-                    <input type="submit" name="login" value="Login">
-                </form>
-            {% endif %}
-        </p>
-    </body>
+    </div>
+</body>
 
 </html>

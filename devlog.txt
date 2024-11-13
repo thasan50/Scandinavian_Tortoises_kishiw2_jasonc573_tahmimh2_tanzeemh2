@@ -53,8 +53,11 @@ kwijaya50 -- 2024-10-31
 - added folders for app, templates, css, ect.
 
 thassan50 -- 2024-11-04
--added directory to house database creator
--added file to create rudimentary databases
+- added directory to house database creator
+- added file to create rudimentary databases
+
+thasan50 -- 2024-11-04
+- designed plans for creating rudimentary databases
 
 kwijaya50 -- 2024-11-05
 - added new python files for newStory and view
@@ -66,3 +69,19 @@ kwijaya50 -- 2024-11-05
 jchao50 -- 2024-11-05
 - worked on user logins and registration
 - created functional baseline program w/o styling
+
+thasan50 -- 2024-11-05
+- worked on database initialization function
+- created initial create user, create story and add to all stories functions
+
+thasan50 -- 2024-11-06
+- modified db_initialization (now called setup) further
+- created edit all stories, edit story, and various get functions
+
+jchao50 -- 2024-11-06
+- connected __init__. with databases
+- fixed all errors with logins
+
+jchao50 -- 2024-11-11
+- added styling to home, login, and register pages
+- removed useless code from __init__

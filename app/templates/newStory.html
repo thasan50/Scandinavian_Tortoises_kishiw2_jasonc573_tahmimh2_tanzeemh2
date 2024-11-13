@@ -1,43 +1,34 @@
 <!DOCTYPE html>
-
 <html>
-
-  <head>
+<head>
     <link rel="stylesheet" href="static/css/newstory.css">
-    <title> New Story </title>
-  </head>
-
-  <nav> 
-        <form action = "/">
-        <input type="submit" name="return" value ="Home">
+    <title>New Story</title>
+</head>
+<body>
+    <nav> 
+        <form action="/">
+            <input type="submit" name="return" value="Home">
         </form>
- </nav>
+    </nav>
+    <div id="background">
 
-  <body>
-    <h1> New Story </h1>
+    	<h1>New Story</h1>
 
-    <form type = "text> 
+    	<form action="/newstory" method="POST">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" minlength = "3" maxlength = "15" required><br>
 
-    <label for="title"> Title: </label><br>
-        <form action = "/">
-        <input type="text" name="title">
-        </form>
+   	<div id ="write">
+            <label for="entry">WRITE!</label><br>
+            <textarea id="entry" name="entry" rows="4" cols="50" minlength = "10" maxlength = "200" required></textarea><br>
+	</div>
 
-<br>
+            <input type="submit" name="submit" value="Submit">
+    	</form>
 
-<label for = "edit"> WRITE! </label><br>
+    </div>
 
-<textarea id="editing" name="edit" rows="4" cols="50">
-Write here!
-</textarea> 
+    <footer> You are currently logged in as {{ user }} </footer>
 
-        <form action = "/view">
-        <input type="submit" name="return" value ="Home">
-        </form>
-
-  </body>
-  
-
-  <footer> You are currently logged in as {{ user }} </footer>
-
+</body>
 </html>

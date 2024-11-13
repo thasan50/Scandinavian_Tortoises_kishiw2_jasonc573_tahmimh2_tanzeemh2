@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+	margin: 0px;
+	margin-bottom: 50px;
+	background-color: #E5CDC8;
+	font-family: "Inter", sans-serif;
+}
+
+h1 {
+	font-weight: 600;
+	font-style: normal;
+	font-size: 45px;
+}
+
+#background {
+	background-color: rgba(255, 255, 255, 0.8);
+	position: center;
+	text-align: center;
+	margin: 0 auto;
+  padding: 0.3%;
+	padding-bottom: 1%;
+	margin-top: 10%;
+	width: 20%;
+	border-radius: 30px;
+}
+
+#return {
+  position: fixed;
+  width: 0.45%;
+  height: 1.4%;
+  padding: 0;
+  margin-top: 0.5%;
+  margin-left: 8.5%;
+  scale: 2.5;
+  border: none;
+  background: none;
+}
+
+input {
+	text-decoration: none;
+	font-style: "Roboto", sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	margin: 0.5%;
+	padding: 10px;
+	border-radius: 30px;
+	width: 60%;
+	cursor: pointer;
+}
+
+#register {
+	width: 66%;
+}
+#register:hover {
+	transition: 0.3s;
+	background-color: rgb(189, 172, 172);
+	color: white;
+}
+
+p {
+	font-size: 13px;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(164, 77, 77);
+	transition: 0.3s;
+}
+a:hover {
+	color: rgb(130, 71, 71);
+}
+
+.flashes {
+	text-align: center;
+	color: rgb(223, 106, 106);
+}

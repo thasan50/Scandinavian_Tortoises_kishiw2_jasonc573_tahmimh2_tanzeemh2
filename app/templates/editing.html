@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-
 <html>
+<head>
+    <title>{{ storyname }}</title>
+</head>
+<body>
+    <nav>
+        <form action="/">
+            <input type="submit" name="return" value="Home">
+        </form>
+    </nav>
+    
+    <h1>{{ storyname }}</h1>
+    <p>{{ content }}</p>
 
-  <head>
-    <title> {{ storyname }} </title>
-  </head>
-
-  <nav>
-    <form action = "/">
-        <input type="submit" name="return" value ="Home">
+    <form action="/edit/{{ storyname }}" method="POST">
+        <textarea id="editing" name="content" rows="4" cols="50">Add the next part of the story here!</textarea>
+        <button type="submit">Submit</button>
     </form>
 
- </nav>
-
-  <body>
-    <h1> {{ storyname }} </h>
-    <p>
-      {{ content }}
-    </p>
-
-<textarea id="editing" name="edit" rows="4" cols="50">
-
-Add the next part of the story here!
-
-</textarea> 
-
-<button form = editing type = submit> Submit </button>
-
-
-  </body>
-  
-
-  <footer> You are currently logged in as {{ user }} </footer>
-
+    <footer> You are currently logged in as {{ user }} </footer>
+</body>
 </html>

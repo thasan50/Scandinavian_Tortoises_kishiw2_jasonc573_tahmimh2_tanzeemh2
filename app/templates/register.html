@@ -1,23 +1,34 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title> REGISTER </title>
-    </head>
-
-    <body>
-        <h1>Please Register</h1>
-
-        <form action="/auth_reg" method="POST">
-            <input type="text" name="new_user" placeholder="New Username">
-            <input type="text" name="new_pass" placeholder="New Password">
-            <input type="submit" name="register" value="Register">
-        </form>
+<head>
+    <link rel="stylesheet" href="static/css/register.css">
+    <title>Register</title>
+</head>
+<body>
+    <div id="background">
 
         <form action="/login">
-            <input type="submit" name="return" value="Go Back">
+            <input type="submit" id="return" name="return" value=&times;>
         </form>
 
-        <p style="color: red"> {{ error_text }} </p> <!-- placeholder text for if the user inputs incorrect registration -->
-    </body>
+        <h1>Register</h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+              <p class="flashes">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form action="/auth_reg" method="POST">
+            <input type="text" name="new_user" placeholder="New Username"><br><br>
+            <input type="password" name="new_pass" placeholder="New Password"><br><br>
+            <input type="password" name="confirm_pass" placeholder="Confirm Password"><br><br>
+            <input type="submit" id="register" name="register" value="Register">
+        </form>
+
+        <p style="color: red">{{ error_text }}</p>
+    </div>
+</body>
 </html>

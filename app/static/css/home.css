@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  margin: 0px;
+  margin-bottom: 50px;
+  background-color: #E5CDC8;
+}
+
+#background {
+	background-color: rgba(255, 255, 255, 0.8);
+	position: center;
+	text-align: center;
+	margin: 0 auto;
+    margin-top: 10%;
+	padding: 0.3%;
+	padding-bottom: 2%;
+	width: 40%;
+	border-radius: 30px;
+    font-family: "Inter", sans-serif;
+    box-shadow: 4px 4px 10px rgba(201, 201, 201, 0.8);
+}
+
+h1 {
+  font-family: "Allerta Stencil", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  text-align: center;
+}
+
+#user {
+  font-weight: 600;
+  color:rgb(203, 114, 114)
+}
+
+#logout {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: 0.3s;
+}
+#logout:hover {
+  color: rgb(162, 147, 147);
+}
+
+#profile, #story {
+  display: inline-block;
+}
+
+#profile {
+  text-align: left;
+  margin-left: 60%;
+  font-size: 20px;
+}
+
+#nav {
+  text-align: center;
+  margin-top: -18%;
+  margin-left: 10%;
+  margin-right: 65%;
+  width: 40%;
+  padding-top: 0.5%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  border-right: solid;
+}
+
+#story_button {
+    text-decoration: none;
+    border: none;
+    background-color: rgb(203, 203, 203);
+    border-radius: 6px;
+	font-style: "Inter", sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	padding: 10px;
+	width: 100%;
+	cursor: pointer;
+}
+#story_button:hover {
+  transition: 0.3s;
+	background-color: rgb(189, 172, 172);
+	color: white;
+    scale: 105%;
+}
