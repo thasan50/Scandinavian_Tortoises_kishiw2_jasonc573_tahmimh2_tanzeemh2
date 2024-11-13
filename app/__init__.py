@@ -27,7 +27,7 @@ def home():
         return render_template("home.html", user = session['username'])
     else:
         return redirect("/login")
-    
+
 # USER LOGIN
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -67,7 +67,7 @@ def auth_reg():
             flash("Passwords do not match.", 'error')
             return render_template("register.html")
         else:
-            try: 
+            try:
                 dbx.create_user(new_username, new_password)
                 flash("You are now registered! Please log in.", 'success')
                 return render_template("login.html")
@@ -90,7 +90,7 @@ def view(title):
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    # gets story id from url 
+    # gets story id from url
     # story_id = session.get('storyID')
     # if request.args.get('id'): # Where is id ever referenced, in html or python? I can't find it
     #     story_id = request.args.get('id')
