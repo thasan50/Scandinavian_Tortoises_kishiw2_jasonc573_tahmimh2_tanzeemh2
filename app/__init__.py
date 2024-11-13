@@ -10,8 +10,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 import os
 import sqlite3
 import sys
-sys.path.insert(0, 'db_maker') # when running __init__.py, user MUST be in project root directory
-import db_maker as dbx
+from db_maker import db_maker as dbx
 DB_FILE = "stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
 
@@ -86,26 +85,40 @@ def logout():
 # STORIES
 @app.route("/view/<title>")
 def view(title):
-    # It's clear that the story content, title and other details are not displayed when on their page
+    # # It's clear that the story content, title and other details are not displayed when on their page
     if 'username' not in session:
         return redirect(url_for('login'))
 
-    # gets story id from url
-    # story_id = session.get('storyID')
-    # if request.args.get('id'): # Where is id ever referenced, in html or python? I can't find it
-    #     story_id = request.args.get('id')
-    #     session['storyID'] = story_id
-
-    # # uses story title to get story data
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT storyContent, title FROM storyData WHERE title = ?", (title,))
+    c.execute("SELECT storyContent, title, storyID FROM storyData WHERE title = ?", (title,))
     story = c.fetchone()
     db.close()
+    
     if not story:
-        return "Story not found", 404
-    story_content, story_title = story # Since when does it work like this?
-    return render_template('view.html', content=story_content, storyname=story_title, user=session['username']) # Isn't it a problem to have so many overlapping names?
+        flash("Story not found", 'error')
+        return redirect(url_for('home'))
+    
+    story_content, story_title, story_id = story
+    session['storyID'] = story_id  # Store story_id in session for editing
+    return render_template('view.html', content=story_content, storyname=story_title, user=session['username'])
+
+    # gets story id from url
+    # story_id = session.get('title')
+    # # if request.args.get('id'): # Where is id ever referenced, in html or python? I can't find it
+    # #     story_id = request.args.get('id')
+    # #     session['storyID'] = story_id
+
+    # # # uses story title to get story data
+    # db = sqlite3.connect(DB_FILE)
+    # c = db.cursor()
+    # c.execute("SELECT storyContent, title FROM storyData WHERE title = ?", (title,))
+    # story = c.fetchone()
+    # db.close()
+    # if not story:
+    #     return "Story not found", 404
+    # story_content, story_title = story # Since when does it work like this?
+    # return render_template('view.html', content=story_content, storyname=story_title, user=session['username']) # Isn't it a problem to have so many overlapping names?
 
 @app.route("/newstory", methods=["GET", "POST"])
 def newstory():
@@ -118,60 +131,63 @@ def newstory():
         title = request.form['title']
         entry = request.form['entry']
         user_id = session['username']
-        print(title)
-        print(entry)
-        # adding the new story to the database
-        db = sqlite3.connect(DB_FILE)
-        c = db.cursor()
-        # Find the next story ID by checking the maximum current storyID
-        c.execute("SELECT MAX(storyID) FROM storyData")
-        result = c.fetchone()
-        story_id = (result[0] + 1) if result[0] is not None else 1
-        # Insert the new story into storyData
-        c.execute('''
-            INSERT INTO storyData (storyID, title, storyContent, allAuthors, lastContent, lastAuthor, editNumber)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (story_id, title, entry, user_id, entry, user_id, 1))
-        db.commit()
-        db.close()
-        # Save the story ID in the session
-        session['storyID'] = story_id
-        # Redirect to the newly created story's view page
-        return redirect(url_for('view', title=title))
+        try:
+            dbx.add_to_all_stories(title, entry, user_id)
+            return redirect(url_for('view', title=title))
+        except sqlite3.IntegrityError:
+            flash("A story with this title already exists.", 'error')
+            return render_template('newStory.html', user=session['username'])
+            
     return render_template('newStory.html', user=session['username'])
 
 @app.route("/edit/<title>", methods=["GET", "POST"])
 def edit(title):
     if 'username' not in session:
         return redirect(url_for('login'))
-    # Retrieve story ID from the session
-    story_id = session.get('storyID')
+    story_id = dbx.get_story_ID(title)
+    if not story_id:
+        flash("Story not found", 'error')
+        return redirect(url_for('home'))
+
     if request.method == 'POST':
-        # Get the new entry from the form
         new_entry = request.form['content']
         user_id = session['username']
-        # Update the story in the database
-        db = sqlite3.connect(DB_FILE)
-        c = db.cursor()
-        # Update the story content
-        c.execute('''
-            UPDATE storyData
-            SET storyContent = storyContent || '\n' || ?, lastContent = ?, lastAuthor = ?, editNumber = editNumber + 1
-            WHERE storyID = ?
-        ''', (new_entry, new_entry, user_id, story_id))
-        db.commit()
-        db.close()
-        # Redirect to the view page after updating the story
-        return redirect(url_for('view'))
-    # Searches fpr the story using the storyID
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    c.execute("SELECT lastContent FROM storyData WHERE storyID = ?", (story_id,))
-    last_entry = c.fetchone()
-    db.close()
-    if not last_entry:
-        return "Story not found", 404
-    return render_template('editing.html', lastentry=last_entry[0], user=session['username'])
+        
+        result = dbx.edit_all_stories(story_id, new_entry, user_id)
+        if result == "You've already edited this story":
+            flash(result, 'error')
+        return redirect(url_for('view', title=title))
+
+    last_entry = dbx.get_story_content(story_id)
+    return render_template('editing.html', lastentry=last_entry, user=session['username'])
+    # # Retrieve story ID from the session
+    # story_id = session.get('storyID')
+    # if request.method == 'POST':
+    #     # Get the new entry from the form
+    #     new_entry = request.form['content']
+    #     user_id = session['username']
+    #     # Update the story in the database
+    #     db = sqlite3.connect(DB_FILE)
+    #     c = db.cursor()
+    #     # Update the story content
+    #     c.execute('''
+    #         UPDATE storyData
+    #         SET storyContent = storyContent || '\n' || ?, lastContent = ?, lastAuthor = ?, editNumber = editNumber + 1
+    #         WHERE storyID = ?
+    #     ''', (new_entry, new_entry, user_id, story_id))
+    #     db.commit()
+    #     db.close()
+    #     # Redirect to the view page after updating the story
+    #     return redirect(url_for('view'))
+    # # Searches fpr the story using the storyID
+    # db = sqlite3.connect(DB_FILE)
+    # c = db.cursor()
+    # c.execute("SELECT lastContent FROM storyData WHERE storyID = ?", (story_id,))
+    # last_entry = c.fetchone()
+    # db.close()
+    # if not last_entry:
+    #     return "Story not found", 404
+    # return render_template('editing.html', lastentry=last_entry[0], user=session['username'])
 
 @app.route('/history')
 def history():
