@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="static/css/view.css">
+    <link rel="stylesheet" href="/static/css/view.css">
     <title>{{ storyname }}</title>
 </head>
+<body>
+
 <nav> 
     <form action="/">
         <input type="submit" name="return" value="Home">
     </form>
 </nav>
-<body>
-    <h1>{{ storyname }}</h1>
-    <p>{{ content }}</p>
-    <p> You've already edited this story!</p>
+
+    <div id ="background">
+
+        <h1>{{ storyname }}</h1>
+
+        <div id = "content">
+            <p>{{ content }}</p>
+        </div>
+
+
+        <div id ="red text">
+            <p> You've already edited this story!</p>
+        </div>
+
+        </div>
+    
     <footer> You are currently logged in as {{ user }} </footer>
+
 </body>
 </html>
