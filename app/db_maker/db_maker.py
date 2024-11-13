@@ -58,13 +58,11 @@ def add_to_all_stories(title, storyContent, author):
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
         c.execute('''
-            INSERT INTO allStories(title, lastContent, firstAuthor, lastAuthor, editNumber)
-            VALUES(?, ?, ?, ?, ?)
+            INSERT INTO allStories(title, lastContent, firstAuthor, lastAuthor, editNumber) VALUES(?, ?, ?, ?, ?)
         ''', (title, storyContent, author, author, 1))
         story_id = c.lastrowid
         c.execute('''
-            INSERT INTO storyData(storyID, title, storyContent, allAuthors, lastContent, lastAuthor, editNumber)
-            VALUES(?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO storyData(storyID, title, storyContent, allAuthors, lastContent, lastAuthor, editNumber) VALUES(?, ?, ?, ?, ?, ?, ?)
         ''', (story_id, title, storyContent, author, storyContent, author, 1))
 
 def edit_all_stories(story_id, lastContent, lastAuthor):
