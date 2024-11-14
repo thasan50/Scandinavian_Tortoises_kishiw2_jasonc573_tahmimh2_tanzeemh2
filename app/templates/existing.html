@@ -7,14 +7,26 @@
 </head>
 <body>
     <h1>Stories Contributed by {{ user }}</h1>
+        <form action="/">
+            <input type="submit" name="return" value="Home">
+        </form>
     
     {% if stories %}
         <ul>
             {% for story in stories %}
                 <li>
+
+                <div id = "history">
                     <h2>{{ story[1] }}</h2> <!-- Story Title -->
+
                     <p><strong>Last Update:</strong> {{ story[2] }}</p> <!-- Last Content -->
-                    <a href="/view/<title>">View Full Story</a>
+
+                    <div id = "vbutton">
+                        <form action="/view/"">
+                        <input type="submit" id="story_button" name="view" value="View Story">
+                    </div>   
+               </div>                
+                </form>
                 </li>
             {% endfor %}
         </ul>
@@ -22,6 +34,5 @@
         <p>You have not contributed to any stories yet.</p>
     {% endif %}
 
-    <a href="/">Return to Home</a>
 </body>
 </html>
