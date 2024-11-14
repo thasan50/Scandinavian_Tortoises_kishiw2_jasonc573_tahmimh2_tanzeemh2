@@ -100,6 +100,16 @@ def get_user_story(username):
         ''', (f'%{username}%',))
         return c.fetchall()
 
+def get_all_story():
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        c.execute('''
+            Select DISTINCT s.storyID, s.title, s.lastContent
+            From allstories s
+            JOIN storyData d ON s.storyID = d.storyID
+            WHERE d.allAuthors LIKE ?''', (*,))
+    return c.fetchall()
+
 def get_story_content(story_id):
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
