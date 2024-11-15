@@ -107,7 +107,7 @@ def get_all_story():
             Select DISTINCT s.storyID, s.title, s.lastContent
             From allstories s
             JOIN storyData d ON s.storyID = d.storyID
-            WHERE d.allAuthors LIKE ?''', (*,))
+            WHERE d.allAuthors LIKE ?''', ('%',))
     return c.fetchall()
 
 def get_story_content(story_id):
