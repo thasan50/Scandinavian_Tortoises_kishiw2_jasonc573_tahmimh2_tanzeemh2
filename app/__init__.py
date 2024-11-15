@@ -11,7 +11,7 @@ import os
 import sqlite3
 import sys
 from db_maker import db_maker as dbx
-DB_FILE = "stories.db" # Names db_file in __init__.py
+DB_FILE = "app/stories.db" # Names db_file in __init__.py
 app = Flask(__name__)
 
 app.secret_key = os.urandom(32)

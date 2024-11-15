@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_FILE = "app/stories.db" 
+DB_FILE = "../app/stories.db" 
 
 def setup():
     os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)

@@ -85,3 +85,6 @@ jchao50 -- 2024-11-06
 jchao50 -- 2024-11-11
 - added styling to home, login, and register pages
 - removed useless code from __init__
+
+thasan50 --2024-11-11
+- fixed databases, added useful code to __init__
